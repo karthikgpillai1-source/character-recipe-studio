@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Character Recipe",
+  "description": "A portable recipe format for character configuration",
+  "type": "object",
+  "required": ["schema", "version", "identity", "behavior", "memory", "knowledge", "modelPreferences"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "recipe-v1"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of this specific recipe"
+    },
+    "identity": {
+      "type": "object",
+      "required": ["name", "description", "category", "sourceType"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the character"
+        },
+        "avatar": {
+          "type": ["string", "null"],
+          "description": "Path or URI to the avatar image"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the character"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Fictional", "Historical", "Original", "Assistant", "Other"]
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": ["Movie", "TV", "Anime", "Game", "Book", "Comic", "Manga", "Web Series", "Real World", "Custom"]
+        },
+        "sourceMaterial": {
+          "type": ["string", "null"],
+          "description": "Origin or source material"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "properties": {
+        "always": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Rules the character must always follow"
+        },
+        "never": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Rules the character must never break"
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "shortTermEnabled": { "type": "boolean", "default": true },
+        "longTermEnabled": { "type": "boolean", "default": true },
+        "importanceThreshold": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.5 }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "properties": {
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["pdf", "docx", "txt", "website"] },
+              "path": { "type": "string" },
+              "metadata": { "type": "object" }
+            },
+            "required": ["id", "type", "path"]
+          }
+        }
+      }
+    },
+    "modelPreferences": {
+      "type": "object",
+      "properties": {
+        "preferredFamily": { "type": ["string", "null"] },
+        "minContextLength": { "type": "integer" },
+        "recommendedSettings": {
+          "type": "object",
+          "properties": {
+            "temperature": { "type": "number" },
+            "topP": { "type": "number" }
+          }
+        }
+      }
+    }
+  }
+}

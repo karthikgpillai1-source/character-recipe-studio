@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  
+  /* Neutral grayscale foundation */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* Single accent color (e.g., Blue) */
+  --color-accent-50: #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
+  --color-accent-900: #1e3a8a;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-neutral-50);
+    --foreground: var(--color-neutral-900);
+    --border: var(--color-neutral-200);
+    --muted: var(--color-neutral-100);
+    --muted-foreground: var(--color-neutral-500);
+    --accent: var(--color-accent-500);
+  }
+  
+  .dark {
+    --background: var(--color-neutral-950);
+    --foreground: var(--color-neutral-50);
+    --border: var(--color-neutral-800);
+    --muted: var(--color-neutral-900);
+    --muted-foreground: var(--color-neutral-400);
+    --accent: var(--color-accent-500);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
